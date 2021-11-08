@@ -1,6 +1,9 @@
 const { GUILD_ID, GENERAL_CHANNEL_ID } = require("../guild/constants");
 const { VERIFIED_ROLE } = require("../roles");
-const { checkStringForEmail } = require("../utils/helper");
+const {
+  checkStringForEmail,
+  fetchUsernameByEmail,
+} = require("../utils/helper");
 
 module.exports = {
   name: "messageCreate",
@@ -36,13 +39,20 @@ module.exports = {
           return;
         }
 
+        const displayName = await fetchUsernameByEmail(email);
+        if (!displayName) {
+          message.reply(
+            "Ooops! I couldn't find this email registered on the Dacade servers. Please signup at www.dacade.org to continue!"
+          );
+          return;
+        }
+
         owner.roles.add(VERIFIED_ROLE);
         message.reply(
           "Thanks for entering your email. You have been verified successfully"
         );
 
-        const nickame = "Legend";
-        await owner.setNickname(nickame);
+        await owner.setNickname(displayName);
 
         client.channels.cache
           .get(GENERAL_CHANNEL_ID)
