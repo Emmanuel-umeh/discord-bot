@@ -1,6 +1,9 @@
 const { config } = require("dotenv");
 config();
 
+const express = require("express");
+const PORT = process.env.PORT || 5001;
+
 const fs = require("fs");
 const { Client, Intents } = require("discord.js");
 
@@ -29,3 +32,5 @@ for (const file of eventFiles) {
 const token = process.env.DISCORD_BOT_TOKEN;
 
 client.login(token);
+
+express().listen(PORT, () => console.log(`Listening on ${PORT}`));
