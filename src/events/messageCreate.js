@@ -52,6 +52,8 @@ module.exports = {
           "Thanks for entering your email. You have been verified successfully"
         );
 
+        console.log({ displayName });
+
         await owner.setNickname(displayName);
 
         client.channels.cache
