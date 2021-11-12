@@ -1,4 +1,3 @@
-const { fetchUserByEmail } = require("../utils/helper");
 
 module.exports = {
   name: "ready",

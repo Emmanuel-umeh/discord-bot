@@ -54,7 +54,7 @@ module.exports = {
 
         console.log({ displayName });
 
-        await owner.setNickname(displayName);
+        await owner.setNickname(`@${displayName}`);
 
         client.channels.cache
           .get(GENERAL_CHANNEL_ID)
